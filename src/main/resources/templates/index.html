@@ -1,10 +1,51 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.springframework.org/schema/data/jaxb">
 <head>
-    <meta charset="UTF-8">
-    <title>INDEX</title>
+    <title>Success</title>
+    <style>
+        table {
+            font-family: arial, sans-serif;
+            border-collapse: collapse;
+            width: 50%;
+        }
+
+        td, th {
+            border: 1px solid #dddddd;
+            text-align: left;
+            padding: 8px;
+        }
+
+        tr:nth-child(even) {
+            background-color: #dddddd;
+        }
+    </style>
 </head>
 <body>
-    hellos
+<h1>List Role</h1>
+
+<table>
+    <a href="/add">Add User</a>
+    <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Active</th>
+        <th>Action</th>
+    </tr>
+
+    <tr th:if="${lsRole.empty}">
+        <td colspan="2"> No Roles Available </td>
+    </tr>
+    <tr th:each="role : ${lsRole}">
+        <td><span th:text="${role.id}"> ID </span></td>
+        <td><span th:text="${role.name}"> Name </span></td>
+        <td><span th:text="${role.active}"> Active </span></td>
+        <td>
+            <a th:href="@{/edit?id={id}(id=${role.id})}" >Edit</a>
+            <a th:href="@{/delete?id={id}(id=${role.id})}" >Delete</a>
+        </td>
+    </tr>
+
+</table>
+
 </body>
 </html>
